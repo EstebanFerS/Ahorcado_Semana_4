@@ -15,6 +15,7 @@ public class PalabrasSecretasGUI extends BaseGUI {
 
     public PalabrasSecretasGUI() {
         super("Administrar Palabras Secretas", 615, 520);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
     }
 
@@ -48,6 +49,11 @@ public class PalabrasSecretasGUI extends BaseGUI {
         btnSalir = createBtn("Salir");
         btnSalir.setBounds(470, 440, 80, 30);
         panelPrincipal.add(btnSalir);
+
+        btnSalir.addActionListener(e -> {
+            new MenuPrincipal().setVisible(true);
+            dispose();
+        });
 
         setContentPane(panelPrincipal);
     }

@@ -1,16 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ahorcado;
 
-import java.awt.*;
 import javax.swing.*;
 
-/**
- *
- * @author DELL
- */
 public class MenuPrincipal extends BaseGUI {
 
     private JPanel panelPrincipal;
@@ -40,10 +31,27 @@ public class MenuPrincipal extends BaseGUI {
         btnJugarFijo = createBtn("Jugar Ahorcado Fijo");
         btnJugarFijo.setBounds(200, 280, 220, 50);
         panelPrincipal.add(btnJugarFijo);
-        
+
         btnSalir = createBtn("Salir");
         btnSalir.setBounds(460, 400, 80, 40);
         panelPrincipal.add(btnSalir);
+
+        btnAgregarPalabra.addActionListener(e -> {
+            new PalabrasSecretasGUI().setVisible(true);
+            dispose();
+        });
+
+        btnJugarAzar.addActionListener(e -> {
+            new GuiAhorcado("AHORCADO AZAR").setVisible(true);
+            dispose();
+        });
+
+        btnJugarFijo.addActionListener(e -> {
+            new GuiAhorcado("AHORCADO FIJO").setVisible(true);
+            dispose();
+        });
+
+        btnSalir.addActionListener(e -> dispose());
 
         setContentPane(panelPrincipal);
     }

@@ -15,6 +15,7 @@ public class GuiAhorcado extends BaseGUI {
 
     public GuiAhorcado(String modo) {
         super("Ahorcado", 770, 560);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.modo = modo;
         initComponents();
     }
@@ -24,7 +25,7 @@ public class GuiAhorcado extends BaseGUI {
         panelPrincipal.setLayout(null);
         setContentPane(panelPrincipal);
 
-        lblTitulo = createLabelTitle(modo, 245, 20, 280, 50);
+        lblTitulo = createLabelTitle(modo, 235, 20, 300, 50);
         panelPrincipal.add(lblTitulo);
 
         lblIntentos = createLabel("Intentos restantes: ", 20, 100, 280, 50);
@@ -57,6 +58,17 @@ public class GuiAhorcado extends BaseGUI {
         btnSalir = createBtn("Salir");
         btnSalir.setBounds(500, 470, 140, 40);
         panelPrincipal.add(btnSalir);
+
+        btnSalir.addActionListener(e -> {
+            new MenuPrincipal().setVisible(true);
+            dispose();
+        });
+
+        btnNuevoJuego.addActionListener(e -> {
+            GuiAhorcado g = new GuiAhorcado(modo);
+            g.setVisible(true);
+            dispose();
+        });
     }
 
     public static void main(String[] args) {
