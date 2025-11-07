@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
 
     protected String palabraSecreta;
-    protected String palabraActual;
+    protected char[] palabraActual;
     protected int intentos;
     protected int limiteIntentos = 6;
     protected ArrayList<Character> letrasUsadas;
