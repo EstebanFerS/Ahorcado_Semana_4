@@ -16,26 +16,15 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
     public void actualizarPalabraActual(char letra) {
         char letraMayus = Character.toUpperCase(letra);
         for (int i = 0; i < palabraSecreta.length(); i++) {
-            if (palabraSecreta.charAt(i) == letraMayus) {
-                palabraActual[i] = letraMayus;
+            if (palabraSecreta.charAt(i) == letra) {
+                palabraActual[i] = letra;
             }
         }
     }
 
     @Override
     public boolean verificarLetra(char letra) {
-        char L = Character.toUpperCase(letra);
-        for (char x : letrasUsadas) {
-            if (x == L) {
-                try {
-                    throw new LetraRepetidaExcepcion("La letra '" + L + "' ya fue utilizada.");
-                } catch (LetraRepetidaExcepcion ex) {
-                    Logger.getLogger(JuegoAhorcadoAzar.class.getName()).log(Level.WARNING, ex.getMessage());
-                }
-                return false;
-            }
-        }
-        return palabraSecreta.indexOf(L) >= 0;
+        return palabraSecreta.indexOf(letra) >= 0;
     }
 
     @Override
@@ -51,19 +40,17 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
     @Override
     public void inicializarPalabraSecreta() throws PalabraNoValidaExcepcion {
         this.palabraSecreta = PalabraSecrata.ObtenerPalabraAlAzar();
-        if (palabraSecreta == null || palabraSecreta.isEmpty()) {
-            throw new PalabraNoValidaExcepcion("La palabra secreta no puede estar vacía.");
-        }
-        this.palabraSecreta = PalabraSecrata.ObtenerPalabraAlAzar();
+
         palabraActual = new char[palabraSecreta.length()];
         for (int i = 0; i < palabraSecreta.length(); i++) {
-            palabraActual[i] = Character.isLetter(palabraSecreta.charAt(i)) ? '_' : palabraSecreta.charAt(i);
+            palabraActual[i] = '_';
         }
         letrasUsadas.clear();
         intentos = limiteIntentos;
     }
 
+    
     @Override
-    public void jugar() {
+    public void jugar(String palabra) throws PalabraNoValidaExcepcion {
     }
 }
