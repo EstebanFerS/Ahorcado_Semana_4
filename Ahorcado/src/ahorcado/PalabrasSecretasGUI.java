@@ -48,6 +48,7 @@ public class PalabrasSecretasGUI extends BaseGUI {
 
         btnSalir = createBtn("Salir");
         btnSalir.setBounds(470, 440, 80, 30);
+        btnSalir.setBackground(Color.red);
         panelPrincipal.add(btnSalir);
 
         btnAgregarPalabra.addActionListener(e -> {

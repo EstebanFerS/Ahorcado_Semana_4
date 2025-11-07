@@ -1,5 +1,6 @@
 package ahorcado;
 
+import java.awt.Color;
 import javax.swing.*;
 
 public class MenuPrincipal extends BaseGUI {
@@ -34,6 +35,8 @@ public class MenuPrincipal extends BaseGUI {
 
         btnSalir = createBtn("Salir");
         btnSalir.setBounds(460, 400, 80, 40);
+        btnSalir.setBackground(Color.red);
+
         panelPrincipal.add(btnSalir);
 
         btnAgregarPalabra.addActionListener(e -> {

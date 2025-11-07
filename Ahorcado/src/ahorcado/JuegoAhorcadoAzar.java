@@ -1,8 +1,5 @@
 package ahorcado;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
 
     public AdminPalabrasSecretas PalabraSecrata;
@@ -52,5 +49,7 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
     
     @Override
     public void jugar(String palabra) throws PalabraNoValidaExcepcion {
+        this.PalabraSecrata = PalabraSecrata;
+        inicializarPalabraSecreta();
     }
 }

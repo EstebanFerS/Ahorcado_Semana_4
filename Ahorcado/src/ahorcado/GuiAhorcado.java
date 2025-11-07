@@ -102,6 +102,7 @@ public class GuiAhorcado extends BaseGUI {
 
         btnSalir = createBtn("Salir");
         btnSalir.setBounds(500, 470, 140, 40);
+        btnSalir.setBackground(Color.red);
         panelPrincipal.add(btnSalir);
 
         // Listeners
