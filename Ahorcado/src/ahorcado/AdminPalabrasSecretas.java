@@ -19,7 +19,7 @@ public class AdminPalabrasSecretas {
     public AdminPalabrasSecretas() {
         palabrasSecretas = new ArrayList<>();
         aleatorio = new Random();
-        
+
         palabrasSecretas.add("UNIVERSIDAD");
         palabrasSecretas.add("COMPUTACION");
         palabrasSecretas.add("CIUDAD");
@@ -34,20 +34,19 @@ public class AdminPalabrasSecretas {
         if (Palabra == null || Palabra.isEmpty()) {
             return false;
         }
-        for (String PlbTemp : palabrasSecretas) {
-            if (!Palabra.equals(PlbTemp)) {
-                palabrasSecretas.add(Palabra);
-                return true;
-            }
 
+        for (String plbTemp : palabrasSecretas) {
+            if (plbTemp.equalsIgnoreCase(Palabra)) {
+                return false;
+            }
         }
-        return false;
+
+        palabrasSecretas.add(Palabra.toUpperCase());
+        return true;
 
     }
 
     public String ObtenerPalabraAlAzar() {
-        
-        
         int NumAleatorio = aleatorio.nextInt(palabrasSecretas.size());
         return palabrasSecretas.get(NumAleatorio);
     }

@@ -9,6 +9,6 @@ package ahorcado;
  * @author Cantarero
  */
 public interface JuegoAhorcado {
-    void inicializarPalabraSecreta();
+    void inicializarPalabraSecreta()throws PalabraNoValidaExcepcion; 
     void jugar();
 }
