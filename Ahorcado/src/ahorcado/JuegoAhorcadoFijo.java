@@ -20,15 +20,28 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase{
    
     @Override
     protected void actualizarPalabraActual(char letra) {
+        for(int i = 0; i<palabraSecreta.length();i++){
+            if(palabraSecreta.charAt(i) == letra){
+                palabraActual[i] = letra;
+            }
         }
+    }
 
     @Override
-    protected void verificarLetra(char letra) {
-    
+    protected boolean verificarLetra(char letra) {
+        for(int i = 0; i<palabraSecreta.length();i++){
+            if(palabraSecreta.charAt(i) == letra)
+                return true;
+        }
+        return false;
     }
 
     @Override
     protected boolean hasGanado() {
+        for(char letra: palabraActual){
+            if(letra == '_')
+                return false;
+        }
         return true;
     }
 
