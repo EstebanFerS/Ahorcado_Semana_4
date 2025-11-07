@@ -1,0 +1,58 @@
+package ahorcado;
+
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class PalabrasSecretasGUI extends BaseGUI {
+
+    private JPanel panelPrincipal;
+    private JButton btnAgregarPalabra, btnSalir;
+    private JLabel lblTitulo, lblNueva;
+    private JTextField txtPalabra;
+    private JScrollPane palabrasActuales;
+    private DefaultTableModel modelo;
+
+    public PalabrasSecretasGUI() {
+        super("Administrar Palabras Secretas", 615, 520);
+        initComponents();
+    }
+
+    public void initComponents() {
+        panelPrincipal = createPanelPrincipal();
+        panelPrincipal.setLayout(null);
+
+        lblTitulo = createLabelTitle("PALABRAS SECRETAS", 115, 20, 400, 50);
+        panelPrincipal.add(lblTitulo);
+
+        lblNueva = createLabel("Nueva palabra:", 60, 120, 200, 40);
+        panelPrincipal.add(lblNueva);
+
+        txtPalabra = createTextField(60, 170, 270, 40);
+        panelPrincipal.add(txtPalabra);
+
+        btnAgregarPalabra = createBtn("Agregar Palabra");
+        btnAgregarPalabra.setBounds(350, 170, 160, 40);
+        panelPrincipal.add(btnAgregarPalabra);
+
+        String[] columnas = {"Palabras"};
+        Object[][] datos = {};
+        palabrasActuales = createTable(columnas, datos, 28);
+        palabrasActuales.setBounds(60, 240, 450, 180);
+        panelPrincipal.add(palabrasActuales);
+
+        JTable t = (JTable) palabrasActuales.getViewport().getView();
+        modelo = new DefaultTableModel(new Object[]{"Palabra"}, 0);
+        t.setModel(modelo);
+
+        btnSalir = createBtn("Salir");
+        btnSalir.setBounds(470, 440, 80, 30);
+        panelPrincipal.add(btnSalir);
+
+        setContentPane(panelPrincipal);
+    }
+
+    public static void main(String[] args) {
+        new PalabrasSecretasGUI().setVisible(true);
+    }
+}
