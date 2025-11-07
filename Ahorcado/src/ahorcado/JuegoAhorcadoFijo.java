@@ -8,20 +8,18 @@ package ahorcado;
  *
  * @author esteb
  */
-public class JuegoAhorcadoFijo extends JuegoAhorcadoBase{
+public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
 
-    
-    
-   public JuegoAhorcadoFijo(String palabra){
-       super();
+    public JuegoAhorcadoFijo(String palabra) throws PalabraNoValidaExcepcion{
+        super();
        this.palabraSecreta = palabra;
        inicializarPalabraSecreta();
-   }
-   
+    }
+
     @Override
     protected void actualizarPalabraActual(char letra) {
-        for(int i = 0; i<palabraSecreta.length();i++){
-            if(palabraSecreta.charAt(i) == letra){
+        for (int i = 0; i < palabraSecreta.length(); i++) {
+            if (palabraSecreta.charAt(i) == letra) {
                 palabraActual[i] = letra;
             }
         }
@@ -29,31 +27,31 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase{
 
     @Override
     protected boolean verificarLetra(char letra) {
-        for(int i = 0; i<palabraSecreta.length();i++){
-            if(palabraSecreta.charAt(i) == letra)
-                return true;
-        }
-        return false;
+        return palabraSecreta.indexOf(letra) >= 0;
     }
 
     @Override
     protected boolean hasGanado() {
-        for(char letra: palabraActual){
-            if(letra == '_')
+        for (char letra : palabraActual) {
+            if (letra == '_') {
                 return false;
+            }
         }
         return true;
     }
 
     @Override
-    public void inicializarPalabraSecreta() {
+    public void inicializarPalabraSecreta() throws PalabraNoValidaExcepcion {
+        if (palabraSecreta == null || palabraSecreta.isEmpty()) {
+            throw new PalabraNoValidaExcepcion("La palabra secreta no puede estar vacía.");
+        }
         palabraActual = new char[palabraSecreta.length()];
-        for(int i = 0; i < palabraSecreta.length(); i++){
-            if (Character.isLetter(palabraSecreta.charAt(i))) 
+        for (int i = 0; i < palabraSecreta.length(); i++) {
+            if (Character.isLetter(palabraSecreta.charAt(i))) {
                 palabraActual[i] = '_';
-            else
+            } else {
                 palabraActual[i] = palabraSecreta.charAt(i);
-            
+            }
         }
     }
 
@@ -61,5 +59,4 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase{
     public void jugar() {
         
     }
-    
 }

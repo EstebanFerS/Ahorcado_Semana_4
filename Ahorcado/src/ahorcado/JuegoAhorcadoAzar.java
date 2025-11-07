@@ -15,7 +15,7 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
 
     public AdminPalabrasSecretas PalabraSecrata;
 
-    public JuegoAhorcadoAzar(AdminPalabrasSecretas PalabraSecrata) {
+    public JuegoAhorcadoAzar(AdminPalabrasSecretas PalabraSecrata) throws PalabraNoValidaExcepcion {
         super();
         this.PalabraSecrata = PalabraSecrata;
         inicializarPalabraSecreta();
@@ -26,7 +26,7 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
 
         for (int i = 0; i < palabraSecreta.length(); i++) {
             if (palabraSecreta.charAt(i) == letraMayus) {
-                palabraActual[i] = letraMayus; 
+                palabraActual[i] = letraMayus;
             }
         }
 
@@ -62,7 +62,11 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
     }
 
     @Override
-    public void inicializarPalabraSecreta() {
+    public void inicializarPalabraSecreta() throws PalabraNoValidaExcepcion {
+        if (palabraSecreta == null || palabraSecreta.isEmpty()) {
+            throw new PalabraNoValidaExcepcion("La palabra secreta no puede estar vacía.");
+        }
+        
         this.palabraSecreta = PalabraSecrata.ObtenerPalabraAlAzar();
         palabraActual = new char[palabraSecreta.length()];
         for (int i = 0; i < palabraSecreta.length(); i++) {
