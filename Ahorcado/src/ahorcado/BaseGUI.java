@@ -49,9 +49,10 @@ public class BaseGUI extends JFrame {
         return b;
     }
 
-    protected JTextField createTextField() {
+    protected JTextField createTextField(int x, int y, int w, int h) {
         JTextField tf = new JTextField();
         tf.setFont(baseFont.deriveFont(14f));
+        tf.setBounds(x, y, w, h);
         tf.setBorder(new CompoundBorder(
                 new LineBorder(new Color(220, 220, 220), 1, true),
                 new EmptyBorder(10, 12, 10, 12)
