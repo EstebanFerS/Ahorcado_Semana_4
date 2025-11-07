@@ -1,25 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ahorcado;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author Cantarero
- */
-public class AdminPalabrasSecretas {
+public final class AdminPalabrasSecretas {
 
-    public ArrayList<String> palabrasSecretas;
-    public Random aleatorio;
+    private static final AdminPalabrasSecretas INSTANCE = new AdminPalabrasSecretas();
 
-    public AdminPalabrasSecretas() {
+    public final ArrayList<String> palabrasSecretas;
+    public final Random aleatorio;
+
+    private AdminPalabrasSecretas() {
         palabrasSecretas = new ArrayList<>();
         aleatorio = new Random();
-
         palabrasSecretas.add("UNIVERSIDAD");
         palabrasSecretas.add("COMPUTACION");
         palabrasSecretas.add("CIUDAD");
@@ -30,25 +23,25 @@ public class AdminPalabrasSecretas {
         palabrasSecretas.add("CALCULADORA");
     }
 
+    public static AdminPalabrasSecretas getInstance() {
+        return INSTANCE;
+    }
+
     public boolean AgregarPalabra(String Palabra) {
         if (Palabra == null || Palabra.isEmpty()) {
             return false;
         }
-
-        for (String plbTemp : palabrasSecretas) {
-            if (plbTemp.equalsIgnoreCase(Palabra)) {
+        for (String s : palabrasSecretas) {
+            if (s.equalsIgnoreCase(Palabra)) {
                 return false;
             }
         }
-
         palabrasSecretas.add(Palabra.toUpperCase());
         return true;
-
     }
 
     public String ObtenerPalabraAlAzar() {
-        int NumAleatorio = aleatorio.nextInt(palabrasSecretas.size());
-        return palabrasSecretas.get(NumAleatorio);
+        int i = aleatorio.nextInt(palabrasSecretas.size());
+        return palabrasSecretas.get(i);
     }
-
 }

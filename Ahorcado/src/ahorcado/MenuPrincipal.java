@@ -47,8 +47,11 @@ public class MenuPrincipal extends BaseGUI {
         });
 
         btnJugarFijo.addActionListener(e -> {
-            new GuiAhorcado("AHORCADO FIJO").setVisible(true);
-            dispose();
+            String p = JOptionPane.showInputDialog(this, "Palabra fija:");
+            if (p != null && !p.trim().isEmpty()) {
+                new GuiAhorcado("AHORCADO FIJO", p.trim()).setVisible(true);
+                dispose();
+            }
         });
 
         btnSalir.addActionListener(e -> dispose());
