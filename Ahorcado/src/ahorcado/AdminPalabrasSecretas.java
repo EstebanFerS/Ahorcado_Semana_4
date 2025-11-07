@@ -18,9 +18,9 @@ public final class AdminPalabrasSecretas {
         palabrasSecretas.add("CIUDAD");
         palabrasSecretas.add("AUTOMOVIL");
         palabrasSecretas.add("TELEVISOR");
-        palabrasSecretas.add("MOTOCICLETA");
-        palabrasSecretas.add("COMPUTADORA");
-        palabrasSecretas.add("CALCULADORA");
+        palabrasSecretas.add("MAGO");
+        palabrasSecretas.add("FILTRO");
+        palabrasSecretas.add("THANOS");
     }
 
     public static AdminPalabrasSecretas getInstance() {
@@ -41,6 +41,9 @@ public final class AdminPalabrasSecretas {
     }
 
     public String ObtenerPalabraAlAzar() {
+        if (palabrasSecretas.isEmpty()) {
+            return "";
+        }
         int i = aleatorio.nextInt(palabrasSecretas.size());
         return palabrasSecretas.get(i);
     }

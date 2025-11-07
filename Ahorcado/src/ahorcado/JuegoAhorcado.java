@@ -10,5 +10,5 @@ package ahorcado;
  */
 public interface JuegoAhorcado {
     void inicializarPalabraSecreta()throws PalabraNoValidaExcepcion; 
-    void jugar();
+    void jugar(String palabra) throws PalabraNoValidaExcepcion;
 }

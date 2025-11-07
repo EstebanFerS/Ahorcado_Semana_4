@@ -10,10 +10,9 @@ package ahorcado;
  */
 public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
 
-    public JuegoAhorcadoFijo(String palabra) throws PalabraNoValidaExcepcion{
+    public JuegoAhorcadoFijo(String palabra) throws PalabraNoValidaExcepcion {
         super();
-       this.palabraSecreta = palabra;
-       inicializarPalabraSecreta();
+        jugar(palabra);
     }
 
     @Override
@@ -56,7 +55,8 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase {
     }
 
     @Override
-    public void jugar() {
-        
+    public void jugar(String palabra) throws PalabraNoValidaExcepcion {
+        this.palabraSecreta = palabra;
+        inicializarPalabraSecreta();
     }
 }

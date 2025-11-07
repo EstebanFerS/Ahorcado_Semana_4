@@ -4,6 +4,14 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * GUI para el juego del Ahorcado.
+ * Depende de:
+ *  - BaseGUI (clase auxiliar para crear labels/buttons/panels)
+ *  - JuegoAhorcadoBase, JuegoAhorcadoFijo, JuegoAhorcadoAzar
+ *  - AdminPalabrasSecretas (Singleton)
+ *  - MenuPrincipal (para volver al menú)
+ */
 public class GuiAhorcado extends BaseGUI {
 
     private JPanel panelPrincipal;
@@ -39,13 +47,17 @@ public class GuiAhorcado extends BaseGUI {
 
     private void iniciarJuego() {
         try {
-            if (modo.contains("AZAR")) {
+            if (modo != null && modo.toUpperCase().contains("AZAR")) {
                 juego = new JuegoAhorcadoAzar(AdminPalabrasSecretas.getInstance());
             } else {
-                juego = new JuegoAhorcadoFijo(palabraFija.toUpperCase());
+                String p = (palabraFija == null) ? "" : palabraFija.toUpperCase();
+                juego = new JuegoAhorcadoFijo(p);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al iniciar el juego: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            juego = null;
+            if (btnAdivinar != null) btnAdivinar.setEnabled(false);
         }
     }
 
@@ -54,7 +66,7 @@ public class GuiAhorcado extends BaseGUI {
         panelPrincipal.setLayout(null);
         setContentPane(panelPrincipal);
 
-        lblTitulo = createLabelTitle(modo, 235, 20, 300, 50);
+        lblTitulo = createLabelTitle(modo == null ? "AHORCADO" : modo, 235, 20, 300, 50);
         panelPrincipal.add(lblTitulo);
 
         lblIntentos = createLabel("Intentos restantes: ", 20, 100, 280, 50);
@@ -74,6 +86,7 @@ public class GuiAhorcado extends BaseGUI {
         taFigura = new JTextArea();
         taFigura.setBounds(60, 150, 200, 250);
         taFigura.setEditable(false);
+        taFigura.setFont(new Font("Monospaced", Font.PLAIN, 12));
         panelPrincipal.add(taFigura);
 
         spRepetidas = createTable(new String[]{"Letras repetidas"}, new Object[][]{}, 28);
@@ -91,16 +104,22 @@ public class GuiAhorcado extends BaseGUI {
         btnSalir.setBounds(500, 470, 140, 40);
         panelPrincipal.add(btnSalir);
 
+        // Listeners
         btnSalir.addActionListener(e -> {
             new MenuPrincipal().setVisible(true);
             dispose();
         });
 
         btnNuevoJuego.addActionListener(e -> {
-            if (modo.contains("AZAR")) {
+            if (modo != null && modo.toUpperCase().contains("AZAR")) {
                 new GuiAhorcado(modo).setVisible(true);
             } else {
-                new GuiAhorcado(modo, palabraFija).setVisible(true);
+                String nueva = JOptionPane.showInputDialog(this, "Ingrese la nueva palabra para modo FIJO:");
+                if (nueva != null && !nueva.equals("")) {
+                    new GuiAhorcado(modo, nueva).setVisible(true);
+                } else {
+                    return;
+                }
             }
             dispose();
         });
@@ -110,35 +129,49 @@ public class GuiAhorcado extends BaseGUI {
     }
 
     private void adivinar() {
-        String s = txtLetra.getText().trim();
-        if (s.isEmpty()) {
+        if (juego == null) return;
+
+        String s = txtLetra.getText();
+        if (s == null || s.length() == 0) {
+            txtLetra.setText("");
             return;
         }
+
         char c = Character.toUpperCase(s.charAt(0));
+
         if (!Character.isLetter(c)) {
             txtLetra.setText("");
             return;
         }
+
         if (juego.letrasUsadas.contains(c)) {
             if (!yaListado(c)) {
                 modeloRepetidas.addRow(new Object[]{String.valueOf(c)});
             }
         } else {
             juego.letrasUsadas.add(c);
+
             boolean ok = juego.verificarLetra(c);
             if (ok) {
                 juego.actualizarPalabraActual(c);
             } else {
                 juego.intentos = Math.max(0, juego.intentos - 1);
+                if (!yaListado(c)) {
+                    modeloRepetidas.addRow(new Object[]{String.valueOf(c)});
+                }
             }
         }
+
         txtLetra.setText("");
         render();
+
         if (juego.hasGanado()) {
-            JOptionPane.showMessageDialog(this, "¡Ganaste!", "Ahorcado", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "¡Ganaste! La palabra era: " + juego.palabraSecreta,
+                    "Ahorcado", JOptionPane.INFORMATION_MESSAGE);
             btnAdivinar.setEnabled(false);
         } else if (juego.intentos == 0) {
-            JOptionPane.showMessageDialog(this, "Perdiste. La palabra era: " + juego.palabraSecreta, "Ahorcado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Perdiste. La palabra era: " + juego.palabraSecreta,
+                    "Ahorcado", JOptionPane.ERROR_MESSAGE);
             btnAdivinar.setEnabled(false);
         }
     }
@@ -153,6 +186,7 @@ public class GuiAhorcado extends BaseGUI {
     }
 
     private void render() {
+        if (juego == null) return;
         lblIntentos.setText("Intentos restantes: " + juego.intentos + "/" + juego.limiteIntentos);
         lblPalabraActual.setText(formatearPalabra(juego.palabraActual));
         int etapa = juego.limiteIntentos - juego.intentos;
@@ -161,10 +195,11 @@ public class GuiAhorcado extends BaseGUI {
     }
 
     private String formatearPalabra(char[] arr) {
-        StringBuilder sb = new StringBuilder();
-        for (char c : arr) {
-            sb.append(c).append(' ');
+        String res = "";
+        for (int i = 0; i < arr.length; i++) {
+            if (!res.equals("")) res = res + ' ';
+            res = res + arr[i];
         }
-        return sb.toString().trim();
+        return res;
     }
 }

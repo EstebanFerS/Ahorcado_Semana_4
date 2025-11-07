@@ -27,69 +27,78 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
     }
 
     protected void crearFigura() {
-        figuraAhorcado.clear();
-        
-        figuraAhorcado.add(
-                "  _______\n"
-                + " |/      |\n"
-                + " |\n"
-                + " |\n"
-                + " |\n"
-                + " |\n"
-                + "|"
-        );
-        
-        figuraAhorcado.add(
-                "  _______\n"
-                + " |/      |\n"
-                + " |      ( )\n"
-                + " |\n"
-                + " |\n"
-                + " |\n"
-                + "|"
-        );
-        
-        figuraAhorcado.add(
-                "  _______\n"
-                + " |/      |\n"
-                + " |      ( )\n"
-                + " |       |\n"
-                + " |\n"
-                + " |\n"
-                + "|"
-        );
-        
-        figuraAhorcado.add(
-                "  _______\n"
-                + " |/      |\n"
-                + " |      ( )\n"
-                + " |      /|\n"
-                + " |\n"
-                + " |\n"
-                + "|"
-        );
-        
-        figuraAhorcado.add(
-                "  _______\n"
-                + " |/      |\n"
-                + " |      ( )\n"
-                + " |      /|\\\n"
-                + " |\n"
-                + " |\n"
-                + "|"
-        );
-        
-        figuraAhorcado.add(
-                "  _______\n"
-                + " |/      |\n"
-                + " |      ( )\n"
-                + " |      /|\\\n"
-                + " |      / \\\n"
-                + " |\n"
-                + "|"
-        );
+    figuraAhorcado.clear();
 
-    }
+    figuraAhorcado.add(
+            "  _______\n"
+          + " |/      |\n"
+          + " |\n"
+          + " |\n"
+          + " |\n"
+          + " |\n"
+          + "|"
+    );
+
+    figuraAhorcado.add(
+            "  _______\n"
+          + " |/      |\n"
+          + " |      ( )\n"
+          + " |\n"
+          + " |\n"
+          + " |\n"
+          + "|"
+    );
+
+    figuraAhorcado.add(
+            "  _______\n"
+          + " |/      |\n"
+          + " |      ( )\n"
+          + " |       |\n"
+          + " |\n"
+          + " |\n"
+          + "|"
+    );
+
+    figuraAhorcado.add(
+            "  _______\n"
+          + " |/      |\n"
+          + " |      ( )\n"
+          + " |      /|\n"
+          + " |\n"
+          + " |\n"
+          + "|"
+    );
+
+    figuraAhorcado.add(
+            "  _______\n"
+          + " |/      |\n"
+          + " |      ( )\n"
+          + " |      /|\\\n"
+          + " |\n"
+          + " |\n"
+          + "|"
+    );
+
+    figuraAhorcado.add(
+            "  _______\n"
+          + " |/      |\n"
+          + " |      ( )\n"
+          + " |      /|\\\n"
+          + " |      /  \n"
+          + " |\n"
+          + "|"
+    );
+
+    figuraAhorcado.add(
+            "  _______\n"
+          + " |/      |\n"
+          + " |      ( )\n"
+          + " |      /|\\\n"
+          + " |      / \\\n"
+          + " |\n"
+          + "|"
+    );
+}
 
     protected abstract void actualizarPalabraActual(char letra);
 
