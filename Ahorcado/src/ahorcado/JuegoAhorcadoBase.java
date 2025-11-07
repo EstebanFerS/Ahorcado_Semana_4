@@ -15,18 +15,22 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
     protected String palabraSecreta;
     protected char[] palabraActual;
     protected int intentos;
-    protected int limiteIntentos = 6;
+    protected final int limiteIntentos = 6;
     protected ArrayList<Character> letrasUsadas;
     protected ArrayList<String> figuraAhorcado;
 
     protected JuegoAhorcadoBase() {
+        letrasUsadas = new ArrayList<>();
+        figuraAhorcado = new ArrayList<>();
         crearFigura();
         intentos = limiteIntentos;
     }
 
     protected void crearFigura() {
         figuraAhorcado.clear();
-        figuraAhorcado.add("  _______\n"
+        
+        figuraAhorcado.add(
+                "  _______\n"
                 + " |/      |\n"
                 + " |\n"
                 + " |\n"
@@ -34,8 +38,9 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
                 + " |\n"
                 + "|"
         );
-
-        figuraAhorcado.add("  _______\n"
+        
+        figuraAhorcado.add(
+                "  _______\n"
                 + " |/      |\n"
                 + " |      ( )\n"
                 + " |\n"
@@ -43,6 +48,7 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
                 + " |\n"
                 + "|"
         );
+        
         figuraAhorcado.add(
                 "  _______\n"
                 + " |/      |\n"
@@ -52,7 +58,7 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
                 + " |\n"
                 + "|"
         );
-
+        
         figuraAhorcado.add(
                 "  _______\n"
                 + " |/      |\n"
@@ -62,7 +68,7 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
                 + " |\n"
                 + "|"
         );
-
+        
         figuraAhorcado.add(
                 "  _______\n"
                 + " |/      |\n"
@@ -72,7 +78,7 @@ public abstract class JuegoAhorcadoBase implements JuegoAhorcado {
                 + " |\n"
                 + "|"
         );
-
+        
         figuraAhorcado.add(
                 "  _______\n"
                 + " |/      |\n"

@@ -49,11 +49,11 @@ public class JuegoAhorcadoFijo extends JuegoAhorcadoBase{
     public void inicializarPalabraSecreta() {
         palabraActual = new char[palabraSecreta.length()];
         for(int i = 0; i < palabraSecreta.length(); i++){
-            if (Character.isLetter(palabraSecreta.charAt(i))) {
+            if (Character.isLetter(palabraSecreta.charAt(i))) 
                 palabraActual[i] = '_';
-            } else {
+            else
                 palabraActual[i] = palabraSecreta.charAt(i);
-            }
+            
         }
     }
 
