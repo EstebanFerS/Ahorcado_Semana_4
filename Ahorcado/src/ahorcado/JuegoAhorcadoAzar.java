@@ -66,7 +66,6 @@ public class JuegoAhorcadoAzar extends JuegoAhorcadoBase {
         if (palabraSecreta == null || palabraSecreta.isEmpty()) {
             throw new PalabraNoValidaExcepcion("La palabra secreta no puede estar vacía.");
         }
-        
         this.palabraSecreta = PalabraSecrata.ObtenerPalabraAlAzar();
         palabraActual = new char[palabraSecreta.length()];
         for (int i = 0; i < palabraSecreta.length(); i++) {
